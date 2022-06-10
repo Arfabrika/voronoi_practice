@@ -25,7 +25,8 @@
 *.la
 *.a
 *.lib
-*.pro
+/voronoi_practice/*pro
+/*Debug
 
 # Executables
 *.exe
