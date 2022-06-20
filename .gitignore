@@ -74,3 +74,5 @@ Thumbs.db
 *.pro
 
 *.pro
+build-code-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/debug/moc_predefs.h
+build-code-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/.qmake.stash
