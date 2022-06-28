@@ -5,6 +5,9 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPair>
+#include <QDebug>
+#include <locus.h>
+#include <math.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,11 +20,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    int generateColor();
+    void makeCentralPerps(point* center);
 
 private:
     void mousePressEvent(QMouseEvent *e);
     void paintEvent(QPaintEvent *e);
     Ui::MainWindow *ui;
-    QVector<QPair<int, int>> points;
+    QVector<locus*> locuses;
+    QVector<QLine*> centralPerps;
+    math* mathmodule;
 };
 #endif // MAINWINDOW_H
