@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <locus.h>
 #include <math.h>
+#include <polygon.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,7 +22,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     int generateColor();
-    void makeCentralPerps(point* center);
+    void makeCentralPerps(QPoint* center);
 
 private:
     void mousePressEvent(QMouseEvent *e);

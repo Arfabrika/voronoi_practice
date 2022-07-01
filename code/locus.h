@@ -2,18 +2,17 @@
 #define LOCUS_H
 
 #include <QObject>
-#include <QLine>
-#include <point.h>
+#include <geometry.h>
 
 class locus : public QObject
 {
     Q_OBJECT
 public:
-    explicit locus(point* p, int color);
+    explicit locus(QPoint* p, int color);
     int getColor();
-    point* getPoint();
+    QPoint* getPoint();
 private:
-    point* center;
+    QPoint* center;
     int color;
 };
 

@@ -2,20 +2,26 @@
 
 point::point()
 {
-    x = y = 0;
+     this->setX(0);
+     this->setY(0);
 }
 
+point::point(QPoint *p)
+{
+    this->setX(p->x());
+    this->setY(p->y());
+}
+
+point::point(int x, int y)
+{
+    this->setX(x);
+    this->setY(y);
+}
+/*
 point* point::qPointToPoint(QPoint p)
 {
     point* np = new point(p.x(), p.y());
     return np;
-}
-
-point::point(int x, int y)//, int color)
-{
-    this->x = x;
-    this->y = y;
-    //this->color = color;
 }
 
 int point::getX()
@@ -26,14 +32,16 @@ int point::getX()
 int point::getY()
 {
     return y;
-}
-
-/*int point::getColor()
-{
-    return color;
 }*/
 
-bool point::operator=(point &p)
+point& point::operator=(point&&p)
 {
-    return (this->x == p.x) && (this->y == p.y);
+    this->setX(p.x());
+    this->setY(p.y());
+    return *this;
+}
+
+bool point::operator==(point &p)
+{
+    return (this->x() == p.x()) && (this->y() == p.y());
 }

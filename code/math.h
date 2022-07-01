@@ -2,17 +2,16 @@
 #define MATH_H
 
 #include <QObject>
-#include <QLine>
-#include <point.h>
+#include <geometry.h>
 
 class math : public QObject
 {
     Q_OBJECT
 public:
     math();
-    bool isPointOnSegment(QLine &l, point &p);
-    point* GetIntersectionLines(QLine &l1, QLine&l2);
-    point* GetIntersectionSegments(QLine &l1, QLine&l2);
+    bool isPointOnSegment(QLine &l, QPoint p);
+    QPoint* GetIntersectionLines(QLine &l1, QLine&l2);
+    QPoint* GetIntersectionSegments(QLine &l1, QLine&l2);
 };
 
 #endif // MATH_H

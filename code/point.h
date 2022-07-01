@@ -4,19 +4,21 @@
 #include <QObject>
 #include <QPoint>
 
-class point : public QObject
+class point : public QObject, public QPoint
 {
     Q_OBJECT
 public:
     point();
-    point(int x, int y);//, int color);
-    int getX();
+    point(QPoint *p);
+    point(int x, int y);
+    /*int getX();
     int getY();
-    point* qPointToPoint(QPoint p);
-    bool operator=(point &p);
-private:
+    point* qPointToPoint(QPoint p);*/
+    bool operator==(point &p);
+    point& operator=(point &&p);
+/*private:
     int x, y;
-    //int color;
+    //int color;*/
 };
 
 #endif // POINT_H

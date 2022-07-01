@@ -1,6 +1,6 @@
 #include "locus.h"
 
-locus::locus(point* p, int color)
+locus::locus(QPoint* p, int color)
 {
     center = p;
     this->color = color;
@@ -11,7 +11,7 @@ int locus::getColor()
     return color;
 }
 
-point* locus::getPoint()
+QPoint* locus::getPoint()
 {
     return center;
 }
