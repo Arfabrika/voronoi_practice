@@ -8,12 +8,15 @@ class locus : public QObject
 {
     Q_OBJECT
 public:
-    explicit locus(QPoint* p, int color);
+    explicit locus(QPointF* cent, polygon *pl, int color);
     int getColor();
-    QPoint* getPoint();
+    QPointF* getPoint();
+    void setPolygon(polygon* pl);
+    void setCenter(QPointF* pt);
 private:
-    QPoint* center;
+    QPointF* center;
     int color;
+    polygon* p;
 };
 
 #endif // LOCUS_H

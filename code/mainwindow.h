@@ -4,11 +4,9 @@
 #include <QMainWindow>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QPair>
 #include <QDebug>
 #include <locus.h>
 #include <math.h>
-#include <polygon.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,14 +20,18 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     int generateColor();
-    void makeCentralPerps(QPoint* center);
+    void makeCentralPerps(QPointF* center);
+    locus* createLocus(QPointF& site, QVector<QPointF*> points);
 
 private:
     void mousePressEvent(QMouseEvent *e);
     void paintEvent(QPaintEvent *e);
+    void updateLocuses(QVector<QPointF *> points);
     Ui::MainWindow *ui;
     QVector<locus*> locuses;
-    QVector<QLine*> centralPerps;
+    QVector<QLineF*> centralPerps;
     math* mathmodule;
+    polygon* border;
+    int cnt = 0;
 };
 #endif // MAINWINDOW_H
