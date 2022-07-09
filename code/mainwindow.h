@@ -21,7 +21,7 @@ public:
     ~MainWindow();
     int generateColor();
     void makeCentralPerps(QPointF* center);
-    locus* createLocus(QPointF& site, QVector<QPointF*> points);
+    locus* createLocus(QPointF& site, QVector<QPointF*> points, int oldColor);
 
 private:
     void mousePressEvent(QMouseEvent *e);

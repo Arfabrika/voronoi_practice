@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <geometry.h>
+#include <QPainter>
 
 class locus : public QObject
 {
@@ -11,8 +12,7 @@ public:
     explicit locus(QPointF* cent, polygon *pl, int color);
     int getColor();
     QPointF* getPoint();
-    void setPolygon(polygon* pl);
-    void setCenter(QPointF* pt);
+    void drawLocus(QPainter* painter);
 private:
     QPointF* center;
     int color;

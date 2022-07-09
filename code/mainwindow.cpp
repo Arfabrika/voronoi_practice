@@ -7,49 +7,44 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->centralwidget->setEnabled(true);
+    /*QVector<QPointF*> a, b, c , d, e, f;
+    a.push_back((new QPointF(10,10)));
+    a.push_back((new QPointF(310,10)));
+    a.push_back((new QPointF(10,310)));
+    b.push_back((new QPointF(10,10)));
+    b.push_back((new QPointF(410,10)));
+    b.push_back((new QPointF(10,410)));
+    polygon* p1 = new polygon(a), *p2 = new polygon(b), *r;
+    r = p1->getIntersectPolygon(*p2);
 
-    QPointF *a = new QPointF(1,1),
-            *b = new QPointF(3,5),
-            *c = new QPointF(7,5),
-            *d = new QPointF(7,1),
-            *e = new QPointF(3,-1),
-            *k = new QPointF(5, 7),
-            *l = new QPointF(8,4),
-            *m = new QPointF(5,4),
-            *t = new QPointF(1,-1);
-    QVector<QPointF*> vec, vec2;
-    vec.push_back(a);
-    vec.push_back(b);
-    vec.push_back(c);
-    vec.push_back(d);
-    vec.push_back(e);
-    vec2.push_back(k);
-    vec2.push_back(l);
-    vec2.push_back(m);
-    polygon* p = new polygon(vec), *p2 = new polygon(vec2), *p3;
-    /*QLineF *l1 = new QLineF(0,6,11,0);
-    QVector<QPointF*> ans = p->GetIntersection(*l1);*/
-    QVector<QPointF*> ans = p->GetIntersection(*p2);
-    //bool qqq = p->isPointInPolygon(*t);
-    //p3 = p->getIntersectPolygon(*p2);
-    /*mathmodule->GetIntersectionLines(*(new QLineF(-100,-1,200,2)), *new QLineF(1,1,2,1));
-    mathmodule->GetIntersectionLines(*(new QLineF(1,1,2,1)), *new QLineF(1,2,3,2));*/
-    /*bool tmp =
-    mathmodule->isPointOnSegment(*(new QLineF(-5,-5,10,10)),*(new QPointF(0 ,0)));
-    qDebug() << tmp;*/
-    /*QLineF *l1 = new QLineF(-1,-1,0,1), *l2 = new QLineF(4,0,0,4);
-    QPointF *a = mathmodule->GetIntersectionSegments(*l1, *l2);
-    a = mathmodule->GetIntersectionSegments(*new QLineF(-1,-1,2,5), *new QLineF(4,0,0,4));
-    a = mathmodule->GetIntersectionSegments(*new QLineF(-1,-1,-1,6), *new QLineF(-2,6,0,4));
-    a = mathmodule->GetIntersectionSegments(*new QLineF(-1,-1,-3,-1), *new QLineF(1,6,0,6));
-    a = mathmodule->GetIntersectionSegments(*new QLineF(-100,-1,100,1), *new QLineF(4,0,0,4));
-    a = nullptr;*/
-    ans.clear();
+    e.push_back(new QPointF(10,10));
+    e.push_back(new QPointF(10,100));
+    e.push_back(new QPointF(100,100));
+    e.push_back(new QPointF(100,10));
+    f.push_back(new QPointF(20,20));
+    f.push_back(new QPointF(20,90));
+    f.push_back(new QPointF(90,90));
+    f.push_back(new QPointF(90,20));
+    p1 = new polygon(e), p2 = new polygon(f);
+    int q = p2->isPolygonInPolygon(*p1);
+
+    c.push_back(new QPointF(10,10));
+    c.push_back(new QPointF(10,100));
+    c.push_back(new QPointF(100,100));
+    c.push_back(new QPointF(100,10));
+    d.push_back(new QPointF(10,10));
+    d.push_back(new QPointF(10,100));
+    d.push_back(new QPointF(50,150));
+    d.push_back(new QPointF(100,100));
+
+    d.push_back(new QPointF(100,10));
+    p1 = new polygon(c), p2 = new polygon(d);
+    r = p1->getIntersectPolygon(*p2);*/
     QVector<QPointF*> borderPts;
-    borderPts.push_back(new QPointF(10,10));
-    borderPts.push_back(new QPointF(10,500));
-    borderPts.push_back(new QPointF(500,500));
-    borderPts.push_back(new QPointF(500,10));
+    borderPts.push_back(new QPointF(11,11));
+    borderPts.push_back(new QPointF(11,509));
+    borderPts.push_back(new QPointF(509,509));
+    borderPts.push_back(new QPointF(509,11));
     border = new polygon(borderPts);
 }
 
@@ -72,16 +67,14 @@ void MainWindow::paintEvent(QPaintEvent *e)
     QPainter painter(this);
     painter.setBackgroundMode(Qt::TransparentMode);
     painter.setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap));
-
+    painter.setBrush(QBrush(0xFFFFFF, Qt::SolidPattern));
     for (int i = 0; i < locuses.size(); i++)
     {
-        painter.setBrush(QBrush(locuses[i]->getColor(), Qt::SolidPattern));
+        locuses[i]->drawLocus(&painter);
+        painter.setBrush(QBrush(QColor(0,0,0), Qt::SolidPattern));
         painter.drawEllipse(locuses[i]->getPoint()->x() -3,
                             locuses[i]->getPoint()->y() -3, 6, 6);
     }
-    painter.setBrush(QBrush(0xFFFFFF, Qt::SolidPattern));
-    for (int i = 0; i < centralPerps.size(); i++)
-        painter.drawLine(*centralPerps[i]);
     painter.end();
 }
 
@@ -95,28 +88,31 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
             && e->y() < wid.bottomRight().y() - 3)
     {
         ui->coords->setText(QString("%1:%2").arg(e->x()).arg(e->y()));
-        QPointF *pt;// = new QPointF(100, 100);//new QPointF(e->x(),e->y());
-        switch (cnt) {
+        QPointF *pt = new QPointF(e->x(),e->y());
+        /*switch (cnt) {
         case 0:
             pt = new QPointF(100, 100);
             break;
         case 1:
+
             pt = new QPointF(300, 300);
+            break;
+        case 2:
+            pt = new QPointF(100, 400);
+            break;
+        case 3:
+            pt = new QPointF(410, 110);
             break;
         default:
             pt = new QPointF(e->x(),e->y());
             break;
-        }
+        }*/
         QVector<QPointF*> points;
         for (int i = 0; i < locuses.size(); i++)
             points.push_back(locuses[i]->getPoint());
         points.push_back(pt);
-        //points.push_back(new QPointF(100,100));
-        //points.push_back(new QPointF(300,300));
-        //locus *loc = createLocus(*pt, points);
         updateLocuses(points);
         makeCentralPerps(pt);
-        //locuses.push_back(loc);
         cnt++;
         update();
     }
@@ -134,12 +130,12 @@ void MainWindow::makeCentralPerps(QPointF* center)
 }
 
 //Instead points -locuses array
-locus* MainWindow::createLocus(QPointF &site, QVector<QPointF *> points)
+locus* MainWindow::createLocus(QPointF &site, QVector<QPointF *> points, int oldColor)
 {
     QVector<QLineF*> halfPlanes;
-    for (int i = 0; i < /*locuses.size()*/ points.size(); i++)
+    for (int i = 0; i < points.size(); i++)
     {
-        QPointF* curPoint = points[i];//locuses[i]->getPoint();//points[i];//
+        QPointF* curPoint = points[i];
         if (!(curPoint->x() == site.x() && curPoint->y() == site.y()))
         {
             QLineF* curSeg = new QLineF(site, *curPoint);
@@ -152,18 +148,22 @@ locus* MainWindow::createLocus(QPointF &site, QVector<QPointF *> points)
             halfPlanes.push_back(curHalfPlane);
         }
     }
-    int color = generateColor();
+    if (!oldColor)
+        oldColor = generateColor();
     polygon* p = border->getIntersectHalfPlanes(site, halfPlanes, *border);
-    locus* curLocus = new locus(&site, p, color);
+    locus* curLocus = new locus(&site, p, oldColor);
     return curLocus;
 }
 
 void MainWindow::updateLocuses(QVector<QPointF *> points)
 {
+    QVector<int> colors;
+    for (auto l : locuses)
+        colors.push_back(l->getColor());
     locuses.clear();
     for (int i = 0; i < points.size(); i++)
     {
-        locus* curLocus = createLocus(*points[i], points);
+        locus* curLocus = createLocus(*points[i], points, (i >= colors.size() ? 0 : colors[i]));
         locuses.push_back(curLocus);
     }
 }
