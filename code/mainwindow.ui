@@ -13,6 +13,11 @@
     <height>564</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>11</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Voronov Diagram</string>
   </property>
@@ -51,17 +56,17 @@
      <enum>QFrame::Raised</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="coords">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>280</y>
-      <width>101</width>
+      <y>20</y>
+      <width>171</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string>Очистить поле</string>
     </property>
    </widget>
   </widget>
@@ -71,7 +76,7 @@
      <x>0</x>
      <y>0</y>
      <width>913</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

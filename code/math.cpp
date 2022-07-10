@@ -28,8 +28,6 @@ bool math::isPointOnSegment(QLineF &l, QPointF p)
         ymin = qMin(l.y1(), l.y2()),
         xmax = qMax(l.x1(), l.x2()),
         ymax = qMax(l.y1(), l.y2());
-    /*if (xmin <= p.x() && xmax >= p.x()&&
-        ymin <= p.y() && ymax >= p.y())*/
     if (isSmaller(xmin, p.x()) && isBigger(xmax, p.x()) &&
         isSmaller(ymin, p.y()) && isBigger(ymax, p.y()))
     {
@@ -57,9 +55,10 @@ QPointF* math::GetIntersectionLines(QLineF &l1, QLineF&l2)
     float det = a1 * b2 - a2 * b1;
     if (fabs(det) <= 1e-2)
     {
-        if (fabs(b1 * c2 - b2* c1) <= 1e-2)
-            intersect_point = infNegPoint;
-        else
+        (fabs(b1 * c2 - b2* c1) <= 1e-2)
+        ?
+            intersect_point = infNegPoint
+        :
             intersect_point = infPoint;
     }
     else
@@ -70,30 +69,6 @@ QPointF* math::GetIntersectionLines(QLineF &l1, QLineF&l2)
     intersect_point = new QPointF(xinter, yinter);
     }
     return intersect_point;
-}
-
-QPointF* math::GetIntersectionSegments(QLineF &l1, QLineF&l2)
-{
-     QPointF* intersect_point  = GetIntersectionLines(l1, l2);
-
-     if (intersect_point->x() == infNegPoint->x() &&
-         intersect_point->y() == infNegPoint->y())
-     {
-         if (isPointOnSegment(l1, l2.p2()))
-            *intersect_point = l2.p2();
-         else if (isPointOnSegment(l1, l2.p1()))
-             *intersect_point = l2.p1();
-         else if (isPointOnSegment(l2, l1.p2()))
-             *intersect_point = l1.p2();
-         else if (isPointOnSegment(l2, l1.p1()))
-             *intersect_point = l1.p1();
-         else
-             intersect_point = infPoint;
-     }
-     else if (!(isPointOnSegment(l1, *intersect_point) &&
-              isPointOnSegment(l2, *intersect_point)))
-         intersect_point = infPoint;
-     return intersect_point;
 }
 
 QPointF* math::GetIntersectionLineAndSegment(QLineF &l, QLineF &seg)

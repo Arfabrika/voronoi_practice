@@ -25,12 +25,4 @@ void locus::drawLocus(QPainter* painter)
     for (int j = 0; j < vec.size(); j++)
         arr[j] = *vec[j];
     painter->drawPolygon(arr, p->size(), Qt::OddEvenFill);
-   /* painter->setBrush(QBrush(color, Qt::SolidPattern));
-    for (int i = 0; i < p->size(); i++)
-    {
-        int j = (i + 1) % p->size();
-        QLineF *curSeg = new QLineF(*p->getPointByIndex(i), *p->getPointByIndex(j));
-        painter->drawLine(*curSeg);
-    }*/
-
 }

@@ -15,7 +15,6 @@ public:
     bool isBigger(float a, float b);
     bool isPointOnSegment(QLineF &l, QPointF p);
     QPointF* GetIntersectionLines(QLineF &l1, QLineF&l2);
-    QPointF* GetIntersectionSegments(QLineF &l1, QLineF&l2);
     QPointF* GetIntersectionLineAndSegment(QLineF &l, QLineF &seg);
 };
 

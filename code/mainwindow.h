@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QDebug>
 #include <locus.h>
 #include <math.h>
 
@@ -23,6 +22,9 @@ public:
     void makeCentralPerps(QPointF* center);
     locus* createLocus(QPointF& site, QVector<QPointF*> points, int oldColor);
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     void mousePressEvent(QMouseEvent *e);
     void paintEvent(QPaintEvent *e);
@@ -32,6 +34,5 @@ private:
     QVector<QLineF*> centralPerps;
     math* mathmodule;
     polygon* border;
-    int cnt = 0;
 };
 #endif // MAINWINDOW_H
